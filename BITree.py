@@ -1,4 +1,6 @@
 
+class BITIndexError(IndexError): pass
+
 class BITree:
     def __init__(self, sz):
         self.size = sz
@@ -6,7 +8,7 @@ class BITree:
         self.sums = [0] * (sz + 1)
 
     def add(self, i, dx):
-        if i <= 0 or i > self.size: raise Exception(f'index out of range: {i}')
+        self._checkInd(i)
         arr, sums = self.arr, self.sums
         arr[i] += dx
 
@@ -15,6 +17,7 @@ class BITree:
             i += i&-i
 
     def update(self, i, x):
+        self._checkInd(i)
         self.add(i, x - self.arr[i])
 
     def sum(self, i=None):
@@ -31,3 +34,7 @@ class BITree:
     def sumRange(self, i0, i1):
         if i0 > i1: raise Exception(f'i0 > i1')
         return self.sum(i1) - self.sum(i0-1)
+
+    def _checkInd(self, i):
+        if i <= 0 or i > self.size:
+            raise BITIndexError(f'index out of range: {i}')

@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+
+import os, sys
+from pathlib import Path
+appPath = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(appPath))
+
+from BITree import BITree
+
+for arr in (
+    [],
+    list(range(2**10)),
+):
+    N = len(arr)
+    bt = BITree(N)
+
+    s = 0
+    for i, x in enumerate(arr):
+        bt.add(i + 1, x)

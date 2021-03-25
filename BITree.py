@@ -1,5 +1,5 @@
 
-class BTree:
+class BITree:
     def __init__(self, sz):
         self.size = sz
         self.arr = [0] * (sz + 1)
@@ -17,8 +17,10 @@ class BTree:
     def update(self, i, x):
         self.add(i, x - self.arr[i])
 
-    def sumAll(self, i=None):
+    def sum(self, i=None):
         if i is None: i = self.size
+
+        sums = self.sums
         s = 0
         while i > 0:
             s += sums[i]
@@ -28,4 +30,4 @@ class BTree:
 
     def sumRange(self, i0, i1):
         if i0 > i1: raise Exception(f'i0 > i1')
-        return self.sumAll(i1) - self.sumAll(i0-1)
+        return self.sum(i1) - self.sum(i0-1)

@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+
+import os, sys
+from pathlib import Path
+appPath = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(appPath))
+
+from BITree import BITree
+
+for N in (0, 1, 2, 3, 15, 16, 100, 256, 1024):
+    bt = BITree(N)
+    assert bt.size == N
+    assert len(bt.arr) == N + 1
+    assert len(bt.sums) == N + 1
+
+    assert all(x == 0 for x in bt.arr)
+    assert all(x == 0 for x in bt.sums)
+
+    # populate
+    arr = list(range(N))
+    for i, x in enumerate(arr):
+        bt.add(i+1, arr[i])
+
+    # check the contents and sums
+    s = 0
+    for i, x in enumerate(arr):
+        assert arr[i] == bt.arr[i+1]
+        s += arr[i]
+        assert s == bt.sum(i+1)

@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+from BTree import BTree
+
+N = 15
+bt = BTree(N)
+for i in range(1, N+1):
+    x = i ** 2
+    bt.update(i, x)
+
+sumRanges = [(1, N), (3, 5), (N, N)]
+
+print(f"arr = {bt.arr}")
+print(f"sum(all) = {bt.sumAll()}")
+print(
+    "\n".join(
+        
+    )
+)
+sum(5, 10) = {bt.sumRange(5, 10)}

@@ -35,11 +35,11 @@ for arr in (
         (8, 8),
         (7, 100),
         (N-1, N-1),
-        (N-2, N),
-        (N-100, N),
+        (N-2, N-1),
+        (N-100, N-1),
     ):
         if i0 > i1: continue
-        if i0 < 1 or i1 > N: continue
+        if i0 < 1 or i1 >= N: continue
 
         s0 = sum(arr[i0:i1+1])
         s1 = bt.sumRange(i0 + 1, i1 + 1)

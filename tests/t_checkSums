@@ -9,7 +9,11 @@ from BITree import BITree
 
 for arr in (
     [],
+    [17],
+    [32, 9],
     list(range(2**10)),
+    list(i**2 for i in range(2**10)),
+    list((-i)**3 for i in range(2**10)),
 ):
     N = len(arr)
     bt = BITree(N)
@@ -17,3 +21,26 @@ for arr in (
     s = 0
     for i, x in enumerate(arr):
         bt.add(i + 1, x)
+        s += x
+
+        ss = bt.sum()
+        assert ss == s
+        assert ss == bt.sum(i + 1)
+        assert ss == bt.sumRange(1, i + 1)
+
+    for i0, i1 in (
+        (0, 0),
+        (1, 1),
+        (0, 2),
+        (8, 8),
+        (7, 100),
+        (N-1, N-1),
+        (N-2, N),
+        (N-100, N),
+    ):
+        if i0 > i1: continue
+        if i0 < 1 or i1 > N: continue
+
+        s0 = sum(arr[i0:i1+1])
+        s1 = bt.sumRange(i0 + 1, i1 + 1)
+        assert s0 == s1

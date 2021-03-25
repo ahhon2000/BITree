@@ -22,6 +22,7 @@ class BITree:
 
     def sum(self, i=None):
         if i is None: i = self.size
+        self._checkInd(i)
 
         sums = self.sums
         s = 0
@@ -33,8 +34,9 @@ class BITree:
 
     def sumRange(self, i0, i1):
         if i0 > i1: raise Exception(f'i0 > i1')
+        if i0 <= 1: return self.sum(i1)
         return self.sum(i1) - self.sum(i0-1)
 
     def _checkInd(self, i):
         if i <= 0 or i > self.size:
-            raise BITIndexError(f'index out of range: {i}')
+            raise BITIndexError(f'index out of range: {i} (sz={self.size})')
